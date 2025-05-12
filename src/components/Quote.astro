@@ -1,0 +1,62 @@
+---
+interface Quote {
+  id: string;
+  quote: string;
+  author: string;
+  category: string;
+}
+
+interface Props {
+  quote: Quote;
+}
+
+const { quote } = Astro.props;
+---
+
+<div class="quote eb-garamond-serif">
+  <blockquote class="quote-text">{quote.quote}</blockquote>
+  <div class="quote-meta">
+    <span class="author">— {quote.author}</span>
+    <span class="category">{quote.category}</span>
+  </div>
+</div>
+
+<style>
+.eb-garamond-serif {
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.quote {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-text {
+  font-size: 4rem;
+  line-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.quote-meta {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.author {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.category {
+  font-size: 0.9rem;
+  color: #666;
+}
+</style>
