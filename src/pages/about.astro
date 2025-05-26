@@ -1,21 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import GridLayout from '../layouts/GridLayout.astro';
 ---
 
-<Layout title="About">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-6">About Potent Quotes</h1>
-    <div class="prose max-w-2xl">
-      <p>Welcome to Potent Quotes, your source for inspiring and thought-provoking quotes. Our mission is to bring you meaningful content that can enrich your life and spark new perspectives.</p>
-      
-      <h2>Our Mission</h2>
-      <p>We believe that words have the power to inspire, motivate, and transform. Through our carefully curated collection of quotes, we aim to provide you with daily inspiration and wisdom.</p>
-      
-      <h2>How We Work</h2>
-      <p>Our quotes are sourced from a variety of authors, thinkers, and leaders throughout history. Each quote is selected for its potential to resonate with readers and provoke meaningful reflection.</p>
-      
-      <h2>Contact Us</h2>
-      <p>Have feedback or suggestions? We'd love to hear from you! Reach out to us through our contact page.</p>
+<GridLayout title="About">
+  <div class="grid-wrapper">
+    <div class="grid-item">
+      <h2>Why?</h2>
+      <p>I started this project because quite frankly, I was sick of losing track of all the good quotes I would stumble upon. I wanted one place where I could find quotes of various categories from all sorts of interesting people from all over the world.</p>
     </div>
-  </main>
-</Layout>
+    
+    <div class="grid-item">
+      <h2>Who made this?</h2>
+      <p>I did. Hi, <a href="https://www.linkedin.com/in/carlosrandujar/" target="_blank" rel="noopener noreferrer">I'm Carlos</a>. I'm a designer with nearly 2 decades of experience. I've built products for small startups and enterprise Fortune 500 companies alike that are used by millions of people around the world.</p>
+    </div>
+    
+    <div class="grid-item">
+      <h2>What's next?</h2>
+      <p>I have some additional features in mind that I plan on adding in the near future to make this resource easier to use. Maybe I'll build a public changelog and roadmap down the road, but for now, check back often to see what's new.</p>
+    </div>
+    
+    <div class="grid-item">
+      <h2>How can I help?</h2>
+      <p>I'm always on the lookout for other great quotes to add. If you have some favorites that you don't see on here, reach out and let me know!</p>
+    </div>
+  </div>
+</GridLayout>

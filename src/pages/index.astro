@@ -1,50 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { fetchQuotes } from '../components/FirebaseData.astro';
+import { fetchQuotes } from '../components/csvData.astro';
 import Quote from '../components/Quote.astro';
 
 // Fetch quotes
 const quotes = await fetchQuotes();
 ---
 
-<Layout>
-  <div class="container">    
+<Layout title="Home">  
     <div class="quotes-container">
       {quotes.map(quote => (
         <Quote quote={quote} />
       ))}
     </div>
-  </div>
 </Layout>
 
 <style>
-.container {
-  max-width: 735px;
-  margin: 0 auto;
-}
-
-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 60px;
-	padding: 1rem;
-}
-
-h1 {
-  text-align: center;
-margin-bottom: 2rem;
-}
-
-.quotes-container {
-	display: flex;
-	flex-direction: column;
-}
-
-@media (max-width: 768px) {
   .quotes-container {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 62.75rem;
+    margin: 0 auto;
+    width: 100%;
   }
-}
 </style>

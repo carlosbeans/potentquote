@@ -1,15 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import GridLayout from '../layouts/GridLayout.astro';
 ---
 
-<Layout title="Contact">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-6">Contact Us</h1>
-    <div class="prose max-w-2xl">
-      <p>For any questions, feedback, or inquiries, please feel free to reach out to us at:</p>
-      <p class="text-lg">
-        <a href="mailto:contact@potentquotes.com" class="text-indigo-600 hover:text-indigo-700">contact@potentquotes.com</a>
-      </p>
+<GridLayout title="Contact Us">
+  <div class="grid-item">
+    <h2>Email Us</h2>
+    <p>For any questions, feedback, or inquiries, please feel free to reach out to us:</p>
+    <p class="mt-4">
+      <a href="mailto:contact@potentquotes.com" class="text-indigo-600 hover:text-indigo-700 font-medium">
+        contact@potentquotes.com
+      </a>
+    </p>
+  </div>
+  
+  <div class="grid-item">
+    <h2>Follow Us</h2>
+    <p>Stay updated with our latest quotes and updates:</p>
+    <div class="mt-4 space-y-2">
+      <p>Twitter: <a href="#" class="text-indigo-600 hover:text-indigo-700">@PotentQuotes</a></p>
+      <p>Instagram: <a href="#" class="text-indigo-600 hover:text-indigo-700">@PotentQuotes</a></p>
     </div>
-  </main>
-</Layout>
+  </div>
+  
+  <div class="grid-item">
+    <h2>Newsletter</h2>
+    <p>Subscribe to our newsletter for daily inspiration:</p>
+    <form class="mt-4 space-y-2">
+      <input type="email" placeholder="Your email address" class="w-full p-2 border rounded">
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        Subscribe
+      </button>
+    </form>
+  </div>
+  
+  <div class="grid-item">
+    <h2>Support</h2>
+    <p>Need help or have a suggestion? We're here to assist you.</p>
+    <p class="mt-4">
+      <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium">
+        Visit our Help Center
+      </a>
+    </p>
+  </div>
+</GridLayout>

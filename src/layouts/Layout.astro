@@ -1,98 +1,139 @@
 ---
-// import { gsap } from "gsap";
-    
-// 	import { ScrollTrigger } from "gsap/ScrollTrigger";
-// 	import { SplitText } from "gsap/SplitText";
-	
-// 	gsap.registerPlugin(ScrollTrigger, SplitText);
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Potent Quote</title>
-	</head>
-	<body>
-		<header class="header">
-			<a href="/" class="logo">Potent Quote</a>
-		</header>
-		<div class="content-wrapper">
-			<slot />
-		</div>
-		<footer class="footer">
-			<div class="footer-content space-between">
-				<copyright>Made by Horchata Club &copy; {new Date().getFullYear()}</copyright>
-				<nav>
-					<a href="/about">About</a>
-					<a href="/contact">Contact</a>					
-				</nav>
-			</div>
-		</footer>
-	</body>
+<html lang="en" class="astro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="view-transition" content="same-origin" />
+
+    <title>Potent Quote | {title}</title>
+  </head>
+  <body data-astro-transition="fade">
+    <header class="header">
+      <a href="/" class="logo"><img src="/Logo.svg" alt="Logo" /></a>
+    </header>
+    <main class="content-wrapper">
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="footer-content space-between">
+        <copyright>Made by Horchata Club &copy; {new Date().getFullYear()}</copyright>
+        <nav>
+          <a href="/about">About</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
 </html>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');	
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		font-family: "DM Sans", sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 16px;
-	}
-	body {
-		background-color: #FAFAFF;
-		color: #1E2749;		
-	}
+  @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+  }
+  body {
+    background-color: #fafaff;
+    color: #1e2749;
+  }
+  .container {
+	display: flex;
+	flex-direction: column;
+    max-width: 735px;
+    margin: 0 auto;
+  }
+  @media (max-width: 400px) {
+    .container {
+      max-width: 100%;
+    }
+  }
 
-	.content-wrapper {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-		min-height: 100vh;
-		justify-content: center;
-		align-items: flex-start;
-		max-width: 735px;
-		margin: 0 auto;
-		padding-bottom: 60px; /* Height of the footer */
-	}
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 60px; /* Height of the footer */
+  }
 
-	.header {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		padding: 4.8rem;
-		z-index: 100;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: linear-gradient(0deg, rgba(250, 250, 255, 0) 0%, rgba(250, 250, 255, 1) 100%);
-	}
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 4.8rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      0deg,
+      rgba(250, 250, 255, 0) 0%,
+      rgba(250, 250, 255, 1) 100%
+    );
 
-	.footer {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 60px;
-		z-index: 100;
-		font-size: .875rem;
-		padding: 2.5rem 4.5rem;
-	}
+    .logo {
+      position: relative;
+      top: -24px;
 
-	.footer-content {
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
+      & > img {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .logo {
+        width: 50%;
+      }
+    }
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 100;
+    font-size: 0.875rem;
+    padding: 2.5rem 4.5rem;
+  }
+
+  @media (max-width: 400px) {
+    .footer {
+      padding: 1.5rem 1.5rem;
+    }
+  }
+
+  .footer-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 </style>
