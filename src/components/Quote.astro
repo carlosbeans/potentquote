@@ -51,7 +51,6 @@ const { quote } = Astro.props;
   padding: 0;
   position: relative;
   z-index: 1;
-  text-wrap-style: balance;
 }
 
 /* Action Container */
@@ -257,8 +256,7 @@ const { quote } = Astro.props;
       </div>
     </div>
     <div class="quoteClickRegion">
-      <div class="quoteOuterContainer">
-        <div class="quote">
+      <div class="quote">
           <div class="quote-text">{quote.quote}</div>
           <div class="quote-meta">
             <div class="author">— {quote.author}</div>
@@ -270,6 +268,4 @@ const { quote } = Astro.props;
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </div>

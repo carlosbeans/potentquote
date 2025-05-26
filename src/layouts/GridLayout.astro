@@ -37,10 +37,16 @@ const { title } = Astro.props;
     width: 100%;
   }
   
-  .grid-item {
-    
+  .grid-item {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     line-height: 164%;
     font-weight: 400;
+  }
+  .grid-item-span {
+    grid-column: span 2;
   }
   
   .grid-item h2 {
