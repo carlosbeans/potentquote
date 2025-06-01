@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { fetchQuotes } from '../components/csvData.astro';
 import Quote from '../components/Quote.astro';
-
 // Fetch quotes
 const quotes = await fetchQuotes();
+
 ---
 
-<Layout title="Home">  
+<Layout title="Potent Quote">  
     <div class="quotes-container">
       {quotes.map(quote => (
         <Quote quote={quote} />
