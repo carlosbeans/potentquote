@@ -9,6 +9,8 @@ interface Quote {
 
 interface Props {
   quote: Quote;
+  class?: string;
+  'data-quote-index'?: string | number;
 }
 
 const { quote } = Astro.props;

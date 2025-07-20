@@ -1,21 +1,123 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { fetchQuotes } from '../components/csvData.astro';
-import Quote from '../components/Quote.astro';
+import Layout from "../layouts/Layout.astro";
+import { fetchQuotes } from "../components/csvData.astro";
+import Quote from "../components/Quote.astro";
 // Fetch quotes
 const quotes = await fetchQuotes();
-
 ---
 
-<Layout title="Potent Quote">  
-    <div class="quotes-container">
-      {quotes.map(quote => (
-        <Quote quote={quote} />
-      ))}
-    </div>
+<Layout title="Potent Quote">
+  <div class="quotes-container">
+    {
+      quotes.map((quote, index) => (
+        <Quote quote={quote} class="quote-item" data-quote-index={index + 1} />
+      ))
+    }
+  </div>
+  <div class="quoteCounterContainer">
+    <div class="quoteCounter" id="quoteCounter">1 of {quotes.length}</div>
+  </div>
+
+  <script>
+    // Wait for everything to be fully loaded
+    window.addEventListener("load", () => {
+      // Small delay to ensure all elements are rendered
+      setTimeout(() => {
+        const counter = document.getElementById("quoteCounter");
+        if (!counter) {
+          console.error("Counter element not found");
+          return;
+        }
+
+        // Get all quote containers (using the outer container class)
+        const quotes = document.querySelectorAll(".quoteOuterContainer");
+        const totalQuotes = quotes.length;
+        console.log("Total quotes found:", totalQuotes);
+
+        // Update the counter with the correct total
+        counter.textContent = `1 of ${totalQuotes}`;
+
+        let currentQuote = 1;
+        let lastScrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        let ticking = false;
+
+        function updateCounter() {
+          const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const scrollDirection = scrollTop > lastScrollTop ? "down" : "up";
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+          // Get the current viewport boundaries
+          const viewportTop = window.scrollY;
+          const viewportBottom = viewportTop + window.innerHeight;
+          const viewportMiddle = viewportTop + window.innerHeight / 2;
+
+          // Check each quote's position relative to viewport
+          quotes.forEach((quote, index) => {
+            const rect = quote.getBoundingClientRect();
+            const quoteTop = rect.top + window.scrollY;
+            const quoteBottom = quoteTop + rect.height;
+            const quoteNumber = index + 1;
+
+            // When scrolling down, check if quote top enters viewport from bottom
+            if (
+              scrollDirection === "down" &&
+              quoteTop <= viewportBottom &&
+              quoteTop >= viewportTop
+            ) {
+              if (quoteNumber > currentQuote) {
+                currentQuote = quoteNumber;
+                if (counter) {
+                  counter.textContent = `${currentQuote} of ${totalQuotes}`;
+                }
+              }
+            }
+
+            // When scrolling up, check if quote bottom leaves viewport from top
+            if (
+              scrollDirection === "up" &&
+              quoteBottom >= viewportTop &&
+              quoteBottom <= viewportBottom
+            ) {
+              if (quoteNumber < currentQuote) {
+                currentQuote = quoteNumber;
+                if (counter) {
+                  counter.textContent = `${currentQuote} of ${totalQuotes}`;
+                }
+              }
+            }
+          });
+        }
+
+        // Initial check
+        updateCounter();
+
+        // Update on scroll with throttling
+        function handleScroll() {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              updateCounter();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+
+        // Add scroll event listener
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        // Clean up event listener on component unmount
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+        };
+      }, 100); // Small delay to ensure all elements are rendered
+    });
+  </script>
 </Layout>
 
-<style>
+<style lang="scss">
+  @use "sass:color";
   .quotes-container {
     display: flex;
     flex-direction: column;
@@ -24,5 +126,28 @@ const quotes = await fetchQuotes();
     max-width: 62.75rem;
     margin: 0 auto;
     width: 100%;
+  }
+  .quoteCounterContainer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 2.5rem 4.5rem;
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+
+    @media (max-width: 400px) {
+      height: 120px;
+    }
+    .quoteCounter {
+      padding: 0.5rem 1rem;
+      border-radius: 360px;
+      // background-color: color.adjust(#1e2749, $lightness: 75%);
+      background-color: #fafaff;
+      border: 1px solid color.adjust(#1e2749, $lightness: 50%);
+    }
   }
 </style>
